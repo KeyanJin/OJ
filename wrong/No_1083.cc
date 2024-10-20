@@ -1,37 +1,35 @@
-#include <iostream>
-
-int main()
+#include <cmath>
+#include <stdio.h>
+int main(void)
 {
-    unsigned long long a,b;
-    std::cin >> a >> b;
-    unsigned long long days = 1;
-    for(int i = 0;i != b;i++)
-    {
-        days *= a;
-    }
+    int a,b;
+    scanf("%d %d",&a,&b);
+    unsigned long long days = pow(a,b);
     unsigned long long day = days % 7;
     switch (day) 
     {
+        case 0:
+            printf("Sunday");
+            break;
         case 1:
-            std::cout << "Monday";
+            printf("Monday");
             break;
         case 2:
-            std::cout << "Tuesday";
+            printf("Tuesday");
             break;
         case 3:
-            std::cout << "Wednesday";
+            printf("Wednesday");
             break;
         case 4:
-            std::cout << "Thursday";
+            printf("Thursday");
             break;
         case 5:
-            std::cout << "Friday";
+            printf("Friday");
             break;
         case 6:
-            std::cout << "Saturday";
+            printf("Saturday");
             break;
-        case 0:
-            std::cout << "Sunday";
+        default:
             break;
     }
     return 0;
