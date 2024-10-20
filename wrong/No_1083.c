@@ -1,12 +1,14 @@
-#include <cmath>
 #include <stdio.h>
 int main(void)
 {
     int a,b;
     scanf("%d %d",&a,&b);
-    unsigned long long days = pow(a,b);
-    unsigned long long day = days % 7;
-    switch (day) 
+    int mod = a % 7;
+    for(int i = 1;i != b;i++)
+    {
+        mod = (mod * 3) % 7;
+    }
+    switch (mod) 
     {
         case 0:
             printf("Sunday");

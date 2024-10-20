@@ -16,7 +16,7 @@ int main()
             break;
         }
     }
-    if(sum < m)
+    if(sum <= m)
     {
         std::cout << 0;
     }
