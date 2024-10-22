@@ -1,35 +1,32 @@
-#include <cstddef>
 #include <iostream>
 #include <vector>
 int main()
 {
-    std::vector<int> nums;
     int n;
     std::cin >> n;
+    std::vector<int> nums;
     for(int i = 0;i != n;i++)
     {
         int temp;
         std::cin >> temp;
         nums.push_back(temp);
-        for(int i = 0;i != nums.size() - 1;i++)
+    }
+    for(int i = 0;i != n;i++)
+    {
+        for(int j = i + 1;j != n;j++)
         {
-            if(nums.at(i) == temp)
+             if(nums[i] == nums[j])
             {
-                nums.pop_back();
+                nums[j] = -1;
             }
         }
-         
     }
     for(auto i : nums)
     {
-        if(i != nums.at(nums.size() - 1))
+        if(i >= 1)
         {
             std::cout << i << " ";
         }
-        else
-        {
-            std::cout << i;
-        }        
     }
     return 0;
 }
