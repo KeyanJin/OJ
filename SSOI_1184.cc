@@ -1,38 +1,31 @@
-#include <cstdlib>
-#include <ctime>
 #include <iostream>
+#include <set>
+
 #include <vector>
 int main()
 {
     int N;
     std::cin >> N;
-    std::vector<int> nums(N);
+    std::vector<int> nums;
     for(int i = 0;i != N;i++)
     {
         int n;
         std::cin >> n;
         nums.push_back(n);
     }
-    for(int i = 0;i != nums.size();i++)
+    for(int i = 0;i != nums.size() - 1;i++)
     {
         for(int j = 0;j < nums.size() - i - 1;j++)
         {
             if(nums.at(j) > nums.at(j + 1))
             {
-                auto temp = nums.at(j);
-                nums.at(j) = nums.at(j + 1);
-                nums.at(j + 1) = temp;
+                std::swap(nums.at(j),nums.at(j + 1));
             }
         }
     }
-    auto itr = nums.begin();
-    while (itr != nums.end() - 1) {
-        if(*itr == *(itr + 1))
-        {
-            
-        }
-    }
-    for(auto i : nums)
+    std::set<int> new_nums(nums.begin(),nums.end());
+    std::cout << new_nums.size() << std::endl;
+    for(auto i : new_nums)
     {
         std::cout << i << " ";
     }
