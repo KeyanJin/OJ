@@ -1,60 +1,30 @@
 #include <iostream>
 #include <string>
-#include <vector>
 int main()
 {
-    int n;
-    std::cin >> n; 
+    int k;
     std::string str;
-    std::cin >> str;
-    std::string alph = "abcdefghijklmnopqrstuvwxyz";
-    std::vector<int> diff;
-    std::vector<int > a;
-    for(auto i = str.begin();i != str.end() - 1;i++)
+    std::cin >> k >> str;
+    int diff = 0;
+    int flag = 0;
+    for(int i = 0;i != k - 1;i++)
     {
-        if(*(i + 1) < *i)
-        {
-            int temp = *i - *(i + 1);
-            diff.push_back(temp);
-        }
-        else
-        {
-            int temp = *(i + 1) - *i;
-            diff.push_back(temp);
-        }
-        
-    }
-    for(int code = 0;code != n - 1;code++)
-    {
-        std::vector<int> new_diff;
         std::string temp;
         std::cin >> temp;
-        for(auto i = temp.begin();i != temp.end() - 1;i++)
+        diff = (temp[0] - str[0] + 26) % 26;
+        for(int j = 1;j != str.size();j++)
         {
-            if(*(i + 1) < *i)
-        {
-            int temp = *(i + 1) - *i + 26;
-            new_diff.push_back(temp);
-        }
-            else
+            if(((temp[j] - str[j] + 26) % 26) != diff)
             {
-                int temp = *(i + 1) - *i;
-                new_diff.push_back(temp);
-            }
-        }
-        for(int i = 0;i != diff.size();i++)
-        {
-            if(diff.at(i) != new_diff.at(i))
-            {
-                a.push_back(code + 1);
+                flag++;
+                std::cout << i + 1 << " ";
                 break;
             }
         }
-
     }
-    for(auto i : a)
+    if(flag == 0)
     {
-        std::cout << i << " ";
+        std::cout << "true";
     }
     return 0;
 }
