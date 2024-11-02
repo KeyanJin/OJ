@@ -1,62 +1,84 @@
 #include <iostream>
-#include <vector>
-void func3(std::vector<int > &nums);
-void func2(std::vector<int > &nums);
-
+#include <queue>
 int main()
 {
     int n;
     std::cin >> n;
-    std::vector<std::vector<int >> a;
+    std::vector<std::queue<int >> vec;
     for(int i = 0;i != n;i++)
     {
         int m;
         std::cin >> m;
-        std::vector<int > nums;
-        for(int j = 1;j <= m;j++)
+        int flag = 2;
+        std::queue<int> mque;
+        for(int ii = 1;ii <= m;ii++)
         {
-            nums.push_back(j);
+            mque.push(ii);
         }
-        func2(nums);
-        a.push_back(nums);
-    }
-    for(auto i : a)
-    {
-        for(auto j : i)
+        for(;mque.size() > 3;)
         {
-            std::cout << j << " ";
+            int size = mque.size();
+            if(flag == 2)
+            {
+                for(int iii = 0;iii < size / 2;iii++)
+                {
+                    int temp = mque.front();
+                    mque.pop();
+                    mque.push(temp);
+                    mque.pop();
+                }
+                flag = 3;
+                if(size & 1)
+                {
+                    int temp = mque.front();
+                    mque.pop();
+                    mque.push(temp);
+                }
+            }
+            else if(flag == 3)
+            {
+                for(int iii = 0;iii < size / 3;iii++)
+                {
+                    int temp = mque.front();
+                    mque.pop();
+                    mque.push(temp);
+                    temp = mque.front();
+                    mque.pop();
+                    mque.push(temp);
+                    mque.pop();
+                }
+                flag = 2;
+                if(size % 3 != 0)
+                {
+                    if(size % 3 == 1)
+                    {
+                        int temp = mque.front();
+                        mque.pop();
+                        mque.push(temp);
+                    }
+                    else if(size % 3 == 2)
+                    {
+                        int temp = mque.front();
+                        mque.pop();
+                        mque.push(temp);
+                        temp = mque.front();
+                        mque.pop();
+                        mque.push(temp);
+                    }
+                    
+                }
+            }
+        }
+        vec.push_back(mque);
+    }
+    for(auto i : vec)
+    {
+        while(!i.empty())
+        {
+            std::cout << i.front() << " ";
+            i.pop();
         }
         std::cout << std::endl;
     }
     return 0;
-}
-void func2(std::vector<int > &nums)
-{
-    if(nums.size() <= 3)
-    {
-        return;
-    }
-    else
-    {
-        for(auto i = nums.begin() + 2;i != nums.end();i += 2)
-        {
-            nums.erase(i);
-        }
-        func3(nums);
-    }
-}
-void func3(std::vector<int > &nums)
-{
-    if(nums.size() <= 3)
-    {
-        return;
-    }
-    else
-    {
-        for(int i = 2;i < nums.size();i += 3)
-        {
-            nums.erase(nums.begin() + i);
-        } 
-        func2(nums);
-    }
 }

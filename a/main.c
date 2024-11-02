@@ -1,34 +1,11 @@
 #include <stdio.h>
 
-// 递归调用函数
-int fb(int n)
+#define 靳科研 main
+#define 你好 int
+#define 说 puts
+
+你好 靳科研(void)
 {
-    if(n == 1)
-    {
-        return 1;
-    }
-    else if(n == 2)
-    {
-        return 1;
-    }
-    else
-    {
-        return fb(n - 1) + fb(n - 2);
-    }
-}
-// 尾递归调用
-int fb_tail(int n,int temp1,int temp2)
-{
-    if(n == 1)
-    {
-        return 1;
-    }
-    else if(n == 2)
-    {
-        return 1;
-    }
-    else
-    {
-        return fb_tail(n - 1,temp2,temp1 + temp2);
-    }
+    说("Hello");
+    return 0;
 }

@@ -1,7 +1,5 @@
-#include <stack>
 int main()
 {
-    
-    std::stack<char> stacks;
+   7 
     return 0;
 }
