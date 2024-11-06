@@ -1,49 +1,66 @@
 #include <iostream>
-#include <sstream>
 #include <string>
-#include <vector>
-void to_lower(std::string &str)
-{
-    for(auto &i : str)
-    {
-        if(i >= 65 && i <= 90)
-        {
-            i += 32;
-        }
-    }
-}
 int main()
 {
-    std::vector<std::string> words;
-    std::string word;
-    std::cin >> word;
-    to_lower(word);
-    std::cin.ignore();
-    std::string sentence;
-    std::getline(std::cin,sentence);
-    std::istringstream record(sentence);
-    std::string temp;
-    while(record >> temp)
+    int n;
+    char op;
+    std::cin >> n;
+    for(int i = 0;i != n;i++)
     {
-        words.push_back(temp);
-    }
-    int count = 0;
-    for(auto &i : words)
-    {
-        to_lower(i);
-        if(i == word)
+        std::string str = "";
+        int result = 0;
+        int num1,num2;
+        if(std::cin >> num1)
         {
-            count++;
+            std::cin >> num2;
+            switch (op) 
+            {
+                case 'a':
+                    result = num1 + num2;
+                    str += std::to_string(num1) + "+" + std::to_string(num2)+ "=" + std::to_string(result);
+                    std::cout << str << std::endl;
+                    std::cout << result << std::endl;
+                    break;
+                case 'b':
+                    result = num1 - num2;
+                    str += std::to_string(num1) + "-" + std::to_string(num2)+ "=" + std::to_string(result);
+                    std::cout << str << std::endl;
+                    std::cout << result << std::endl;
+                    break;
+                case 'c':
+                    result = num1 * num2;
+                    str += std::to_string(num1) + "*" + std::to_string(num2)+ "=" + std::to_string(result);
+                    std::cout << str << std::endl;
+                    std::cout << result << std::endl;
+                    break;
+            }
         }
-    }
-    if(count != 0)
-    {
-        int index = sentence.find(word);
-        std::cout << count << " " << index;
-    }
-    else
-    {
-        std::cout << -1;
+        else
+        {
+            std::cin.ignore();
+            std::cin >> op >> num1 >> num2;
+            switch (op) 
+            {
+                case 'a':
+                    result = num1 + num2;
+                    str += std::to_string(num1) + "+" + std::to_string(num2)+ "=" + std::to_string(result);
+                    std::cout << str << std::endl;
+                    std::cout << result << std::endl;
+                    break;
+                case 'b':
+                    result = num1 - num2;
+                    str += std::to_string(num1) + "-" + std::to_string(num2)+ "=" + std::to_string(result);
+                    std::cout << str << std::endl;
+                    std::cout << result << std::endl;
+                    break;
+                case 'c':
+                    result = num1 * num2;
+                    str += std::to_string(num1) + "*" + std::to_string(num2)+ "=" + std::to_string(result);
+                    std::cout << str << std::endl;
+                    std::cout << result << std::endl;
+                    break;
+            }
+        }
     }
     return 0;
 }
