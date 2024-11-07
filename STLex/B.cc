@@ -65,7 +65,6 @@ int main()
                         mque.pop();
                         mque.push(temp);
                     }
-                    
                 }
             }
         }
