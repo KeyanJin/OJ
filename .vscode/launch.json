@@ -2,6 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "C#: <project-name> Debug",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/<relative-path-to-project-folder><project-name>.csproj"
+    },
+    {
       "name": ".NET Core Launch (console)",
       "type": "coreclr",
       "request": "launch",
@@ -19,8 +25,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/JinKeyan/Documents/RobotLab",
-      "program": "d:/JinKeyan/Documents/RobotLab/build/Debug/outDebug",
+      "cwd": "d:/JinKeyan/Documents/RobotLab/luogu",
+      "program": "d:/JinKeyan/Documents/RobotLab/luogu/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
