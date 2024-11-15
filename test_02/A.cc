@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <cstdio>
 #include <iostream>
-#include <setjmp.h>
 #include <vector>
 int main()
 {

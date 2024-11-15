@@ -25,8 +25,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/JinKeyan/Documents/RobotLab/luogu",
-      "program": "d:/JinKeyan/Documents/RobotLab/luogu/build/Debug/outDebug",
+      "cwd": "d:/JinKeyan/Documents/RobotLab/my_code",
+      "program": "d:/JinKeyan/Documents/RobotLab/my_code/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

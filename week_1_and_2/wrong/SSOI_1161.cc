@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+
 void func(std::map<int, std::string> chars,int x,int m,std::string &result)
 {
     int quo = x / m;
@@ -15,6 +16,7 @@ void func(std::map<int, std::string> chars,int x,int m,std::string &result)
     auto temp = chars.find(mod);
     result += temp->second;
 }
+
 int main()
 {
     std::map<int, std::string> chars = {{0,"0"},{1,"1"},{2,"2"},
