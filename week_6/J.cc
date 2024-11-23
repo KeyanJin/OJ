@@ -10,13 +10,13 @@ int used[N];
 
 void init()
 {
-    for(int i = 0;i < n;i++)
+    for (int i = 0; i < n; i++)
     {
-        for(int j = 0;j < n;j++)
+        for (int j = 0; j < n; j++)
         {
-            for(int k = 1;k < std::min(s[i].size(),s[j].size());k++)
+            for (int k = 1; k < std::min(s[i].size(), s[j].size()); k++)
             {
-                if(s[i].substr(s[i].size() - k) == s[j].substr(0,k))
+                if (s[i].substr(s[i].size() - k) == s[j].substr(0, k))
                 {
                     arr[i][j] = k;
                     // 此处应该break，只取最小重叠长度
@@ -27,15 +27,15 @@ void init()
     }
 }
 
-void dfs(std::string str,int cur)
+void dfs(std::string str, int cur)
 {
-    ans = std::max(ans,(int)str.size());
-    for(int i = 0;i != n;i++)
+    ans = std::max(ans, (int)str.size());
+    for (int i = 0; i != n; i++)
     {
-        if(used[i] < 2 && arr[cur][i] != 0)
+        if (used[i] < 2 && arr[cur][i] != 0)
         {
             used[i]++;
-            dfs(str + s[i].substr(arr[cur][i]),i);
+            dfs(str + s[i].substr(arr[cur][i]), i);
             used[i]--;
         }
     }
@@ -43,20 +43,20 @@ void dfs(std::string str,int cur)
 int main()
 {
     std::cin >> n;
-    for(int i = 0;i != n;i++)
+    for (int i = 0; i != n; i++)
     {
         std::cin >> s[i];
     }
     init();
     char ch;
     std::cin >> ch;
-    for(int i = 0;i != n;i++)
+    for (int i = 0; i != n; i++)
     {
-        if(ch == s[i][0])
+        if (ch == s[i][0])
         {
             used[i]++;
-            dfs(s[i],i); // 次数参数应该是i
-            //used[i]++; 在这里++无法正确执行
+            dfs(s[i], i); // 次数参数应该是i
+            // used[i]++; 在这里++无法正确执行
         }
     }
     std::cout << ans;

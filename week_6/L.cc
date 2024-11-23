@@ -3,20 +3,19 @@
 std::vector<int> arr;
 
 int NUM;
-void dfs(int n,int start)
+void dfs(int n, int start)
 {
-    if(n == 0)
+    if (n == 0)
     {
-        for(auto i = arr.begin();i != arr.end();i++)
+        for (auto i = arr.begin(); i != arr.end(); i++)
         {
-            if(*i == NUM)
+            if (*i == NUM)
             {
                 continue;
             }
-            if(i != arr.begin())
-            {   
-                     std::cout << "+" << *i;
-                
+            if (i != arr.begin())
+            {
+                std::cout << "+" << *i;
             }
             else
             {
@@ -28,10 +27,10 @@ void dfs(int n,int start)
     }
     else
     {
-        for (int i = start;i <= n;i++) 
+        for (int i = start; i <= n; i++)
         {
             arr.push_back(i);
-            dfs(n - i,i);
+            dfs(n - i, i);
             arr.pop_back();
         }
     }
@@ -40,6 +39,6 @@ void dfs(int n,int start)
 int main()
 {
     std::cin >> NUM;
-    dfs(NUM,1);
+    dfs(NUM, 1);
     return 0;
 }

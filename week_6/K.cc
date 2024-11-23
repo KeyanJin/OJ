@@ -8,18 +8,18 @@ char arr[] = {'y', 'i', 'z', 'h', 'o', 'n', 'g'};
 int dx[] = {0, 0, 1, 1, 1, -1, -1, -1};
 int dy[] = {1, -1, 0, -1, 1, 0, -1, 1};
 
-bool dfs(int x, int y, int flag, int direction) 
+bool dfs(int x, int y, int flag, int direction)
 {
-    if (flag == 7) 
+    if (flag == 7)
     {
         return true;
     }
     int n_x = x + dx[direction];
     int n_y = y + dy[direction];
 
-    if (n_x >= 0 && n_x < n && n_y >= 0 && n_y < n && letters[n_x][n_y] == arr[flag]) 
+    if (n_x >= 0 && n_x < n && n_y >= 0 && n_y < n && letters[n_x][n_y] == arr[flag])
     {
-        if (dfs(n_x, n_y, flag + 1, direction)) 
+        if (dfs(n_x, n_y, flag + 1, direction))
         {
             ans[n_x][n_y] = arr[flag];
             return true;
@@ -27,28 +27,29 @@ bool dfs(int x, int y, int flag, int direction)
     }
     return false;
 }
-int main() {
+int main()
+{
     std::cin >> n;
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++) 
+        for (int j = 0; j < n; j++)
         {
             ans[i][j] = '*';
         }
     }
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
         std::cin >> letters[i];
     }
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++) 
+        for (int j = 0; j < n; j++)
         {
-            if (letters[i][j] == 'y') 
+            if (letters[i][j] == 'y')
             {
-                for (int k = 0; k < 8; k++) 
+                for (int k = 0; k < 8; k++)
                 {
-                    if (dfs(i, j, 1, k)) 
+                    if (dfs(i, j, 1, k))
                     {
                         ans[i][j] = 'y';
                         break;
@@ -57,9 +58,9 @@ int main() {
             }
         }
     }
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++) 
+        for (int j = 0; j < n; j++)
         {
             std::cout << ans[i][j];
         }
