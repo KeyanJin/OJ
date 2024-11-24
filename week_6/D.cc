@@ -1,3 +1,4 @@
+// D - 奇怪的电梯
 #include <iostream>
 #include <queue>
 const int size = 200;
@@ -5,11 +6,11 @@ typedef struct fl
 {
     int floor;
     int steps;
-}fl;
+} fl;
 int up_down[size + 1];
 int ans = 0;
 bool vis[size + 1];
-int N,A,B;
+int N, A, B;
 std::queue<fl> m_que;
 void bfs()
 {
@@ -18,17 +19,17 @@ void bfs()
     temp.floor = A;
     temp.steps = 0;
     m_que.push(temp);
-    while(!m_que.empty())
+    while (!m_que.empty())
     {
         fl fir = m_que.front();
         m_que.pop();
-        if(fir.floor == B)
+        if (fir.floor == B)
         {
             ans = fir.steps;
             break;
         }
         int next_floor = fir.floor + up_down[fir.floor];
-        if(next_floor <= N && vis[next_floor] == false)
+        if (next_floor <= N && vis[next_floor] == false)
         {
             vis[next_floor] = true;
             fl new_fl;
@@ -37,7 +38,7 @@ void bfs()
             m_que.push(new_fl);
         }
         int next_floor2 = fir.floor - up_down[fir.floor];
-        if(next_floor2 >= 1 && vis[next_floor2] == false)
+        if (next_floor2 >= 1 && vis[next_floor2] == false)
         {
             vis[next_floor2] = true;
             fl new_fl;
@@ -51,7 +52,7 @@ void bfs()
 int main()
 {
     std::cin >> N >> A >> B;
-    for(int i = 1;i <= N;i++)
+    for (int i = 1; i <= N; i++)
     {
         std::cin >> up_down[i];
     }

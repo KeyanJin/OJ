@@ -1,3 +1,4 @@
+// K - 单词方阵
 #include <iostream>
 
 int n;
