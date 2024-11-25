@@ -1,123 +1,70 @@
 #include <iostream>
-#include <queue>
+#include <string>
 #include <vector>
 
-int n;
-const int size = 30;
-int matrix[size][size];
-bool available[size][size];
-
-typedef struct point
+bool dfs(const std::vector<std::string> &words, bool arr[512][512], bool used[512], std::string current, int curIndex)
 {
-    int x;
-    int y;
-} point;
-
-std::queue<point> points;
-int dx[] = {1, -1, 0, 0};
-int dy[] = {0, 0, 1, -1};
-
-bool judge(int x, int y)
-{
-    if (x >= 0 && x < n && y >= 0 && y < n)
+    if (current.back() == 'm')
     {
         return true;
+    }
+    for (int i = 0; i < words.size(); ++i)
+    {
+        if (arr[curIndex][i] && !used[i])
+        {
+            used[i] = true;
+            if (dfs(words, arr, used, words[i], i))
+            {
+                return true;
+            }
+            used[i] = false;
+        }
     }
     return false;
 }
 
-void bfs(int x, int y)
-{
-    std::vector<point> ps;
-    point temp;
-    temp.x = x;
-    temp.y = y;
-    points.push(temp);
-    ps.push_back(temp);
-    while (!points.empty())
-    {
-        point p1 = points.front();
-        points.pop();
-        for (int i = 0; i < 4; i++)
-        {
-            int n_x = p1.x + dx[i];
-            int n_y = p1.y + dy[i];
-            if (judge(n_x, n_y) && available[n_x][n_y] == true && matrix[n_x][n_y] == 0)
-            {
-                available[n_x][n_y] = false;
-                point p2;
-                p2.x = n_x;
-                p2.y = n_y;
-                points.push(p2);
-                ps.push_back(p2);
-            }
-        }
-    }
-    for (auto i : ps)
-    {
-        matrix[i.x][i.y] = 2;
-    }
-}
-
 int main()
 {
-    std::cin >> n;
-    for (int i = 0; i < n; i++)
+    std::vector<std::string> words;
+    bool arr[512][512] = {false};
+    bool used[512] = {false};
+
+    std::string str;
+    while (true)
     {
-        for (int j = 0; j < n; j++)
+        std::cin >> str;
+        if (str == "0")
         {
-            std::cin >> matrix[i][j];
+            break;
         }
+        words.push_back(str);
     }
-    for (int i = 0; i < n; i++)
+
+    int wordCount = words.size();
+    for (int i = 0; i < wordCount; ++i)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < wordCount; ++j)
         {
-            available[i][j] = true;
-        }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (matrix[i][j] == 1)
+            if (words[i].back() == words[j].front())
             {
-                available[i][j] = false;
+                arr[i][j] = true;
             }
         }
     }
-    for (int i = 0; i < n; i++)
+
+    for (int i = 0; i < wordCount; ++i)
     {
-        for (int j = 0; j < n; j++)
+        if (words[i].front() == 'b')
         {
-            if ((i == 0 || i == n - 1 || j == 0 || j == n - 1) && matrix[i][j] == 0)
+            std::fill(used, used + 512, false);
+            used[i] = true;
+            if (dfs(words, arr, used, words[i], i))
             {
-                available[i][j] = false;
+                std::cout << "Yes." << std::endl;
+                return 0;
             }
         }
     }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (matrix[i][j] == 0 && available[i][j] == true)
-            {
-                available[i][j] = false;
-                bfs(i, j);
-            }
-        }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            std::cout << matrix[i][j];
-            if (j < n - 1)
-            {
-                std::cout << " ";
-            }
-        }
-        std::cout << std::endl;
-    }
+    std::cout << "No." << std::endl;
     return 0;
 }
