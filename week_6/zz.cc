@@ -1,82 +1,66 @@
 #include <iostream>
 #include <queue>
+#include <vector>
 
-char maze[21][21];
-int w, h;
-bool avail[21][21];
-
-struct pos
+bool judge(int n)
 {
-    int x;
-    int y;
-};
-
-std::queue<pos> que;
-int dx[] = {0, 0, 1, -1};
-int dy[] = {1, -1, 0, 0};
-
-bool judge(int x, int y)
-{
-    return (x >= 0 && x < h && y >= 0 && y < w);
+    return (n >= 0 && n <= 100000);
 }
 
-int bfs(int x, int y)
+int bfs(int N, int K)
 {
-    int ans = 1;
-    pos p1 = {x, y};
-    que.push(p1);
-    avail[x][y] = false;
+    if (N == K)
+        return 0;
+
+    std::queue<int> que;                      
+    std::vector<bool> visited(100001, false); 
+    visited[N] = true;                       
+    que.push(N);
+
+    int steps = 0; 
     while (!que.empty())
     {
-        pos p2 = que.front();
-        que.pop();
-        for (int i = 0; i != 4; i++)
+        int size = que.size();
+        for (int i = 0; i < size; ++i)
         {
-            int x_ = p2.x + dx[i];
-            int y_ = p2.y + dy[i];
-            if (avail[x_][y_] == true && judge(x_, y_))
+            int pos = que.front();
+            que.pop();
+
+           
+            if (pos == K)
             {
-                pos p3 = {x_, y_};
-                que.push(p3);
-                avail[x_][y_] = false;
-                ans++;
+                return steps;
+            }
+
+           
+            if (pos - 1 >= 0 && !visited[pos - 1])
+            {
+                visited[pos - 1] = true;
+                que.push(pos - 1);
+            }
+
+            if (pos + 1 <= 100000 && !visited[pos + 1])
+            {
+                visited[pos + 1] = true;
+                que.push(pos + 1);
+            }
+
+            if (pos * 2 <= 100000 && !visited[pos * 2])
+            {
+                visited[pos * 2] = true;
+                que.push(pos * 2);
             }
         }
+        ++steps;
     }
-    return ans;
+    return -1;
 }
 
 int main()
 {
-    for (; std::cin >> w >> h;)
-    {
-        int start_x, start_y;
-        if (w == 0 && h == 0)
-        {
-            break;
-        }
-        for (int i = 0; i != h; i++)
-        {
-            for (int j = 0; j != w; j++)
-            {
-                avail[i][j] = false;
-                std::cin >> maze[i][j];
-                if (maze[i][j] == '.')
-                {
-                    avail[i][j] = true;
-                }
-                if (maze[i][j] == '@')
-                {
-                    start_x = i;
-                    start_y = j;
-                    avail[i][j] = true;
-                }
-            }
-        }
-        while (!que.empty())
-            que.pop();
-        int ans = bfs(start_x, start_y);
-        std::cout << ans << std::endl;
-    }
+    int N, K;
+    std::cin >> N >> K;
+    int ans = bfs(N, K);
+    std::cout << ans;
     return 0;
 }
