@@ -4,27 +4,28 @@
 const int size = 20;
 int nums[size + 1];
 bool vis[size + 1];
-int n,k;
+int n, k;
+
 std::set<int> primes;
 bool is_prime(int a)
 {
-    if(a == 1)
+    if (a == 1)
     {
         return false;
     }
-    else if(a == 2 || a == 3)
+    else if (a == 2 || a == 3)
     {
         return true;
     }
-    else if(a % 2 == 0 || a % 3 == 0)
+    else if (a % 2 == 0 || a % 3 == 0)
     {
         return false;
     }
     else
     {
-        for(int i = 5;i * i <= a;i += 6)
+        for (int i = 5; i * i <= a; i += 6)
         {
-            if(a % i == 0 || a % (i + 2) == 0)
+            if (a % i == 0 || a % (i + 2) == 0)
             {
                 return false;
             }
@@ -32,22 +33,22 @@ bool is_prime(int a)
         return true;
     }
 }
-void dfs(int sum,int pos)
+void dfs(int sum, int pos)
 {
-    if(pos == k + 1)
+    if (pos == k + 1)
     {
-        if(is_prime(sum))
+        if (is_prime(sum))
         {
             primes.insert(sum);
         }
         return;
     }
-    for(int i = 0;i != n;vis[i] = true,i++)
+    for (int i = 0; i != n; vis[i] = true, i++)
     {
-        if(vis[i] == false)
+        if (vis[i] == false)
         {
             vis[i] = true;
-            dfs(sum + nums[i],pos + 1);
+            dfs(sum + nums[i], pos + 1);
             vis[i] = false;
         }
     }
@@ -55,11 +56,11 @@ void dfs(int sum,int pos)
 int main(void)
 {
     std::cin >> n >> k;
-    for(int i = 0;i != n;i++)
+    for (int i = 0; i != n; i++)
     {
         std::cin >> nums[i];
     }
-    dfs(0,1);
+    dfs(0, 1);
     std::cout << primes.size();
     return 0;
 }

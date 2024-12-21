@@ -37,11 +37,11 @@ int main()
     std::cin >> n;
     for (int i = 0; i != n; i++)
     {
-       std::cin >> x_arr[i];
-       std::cin >> y_arr[i];
+        std::cin >> x_arr[i];
+        std::cin >> y_arr[i];
     }
     memset(eaten, false, sizeof(eaten));
     dfs(0.0, 0, 0, 0);
-    printf("%.2lf",ans);
+    printf("%.2lf", ans);
     return 0;
 }
